@@ -59,9 +59,11 @@ AI-Motor-Evaluation/
 ├── docs/                          # GitHub Pages landing page
 │   └── index.html
 ├── protocol/                      # Coding manual and documentation
-│   └── [paste your coding manual here]
-├── scripts/                       # Python analysis scripts
-│   └── [paste your scripts here]
+│   └── protocol
+├── AI video analysis script/                       # Python analysis scripts
+│   └── sitting_analysis.py
+├── AI performance scoring script/                       # Python scoring scripts
+│   └── sitting_eval.py
 └── CITATION.cff                   # Citation metadata
 ```
 
