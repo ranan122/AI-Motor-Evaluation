@@ -60,10 +60,10 @@ AI-Motor-Evaluation/
 │   └── index.html
 ├── protocol/                      # Coding manual and documentation
 │   └── protocol
-├── AI video analysis script/                       # Python analysis scripts
+├── AI video analysis script/      # Python analysis scripts
 │   └── sitting_analysis.py
-├── AI performance scoring script/                       # Python scoring scripts
-│   └── sitting_eval.py
+├── AI performance scoring script/ # Python scoring scripts
+│   └── sitting_ai_performance.py
 └── CITATION.cff                   # Citation metadata
 ```
 
