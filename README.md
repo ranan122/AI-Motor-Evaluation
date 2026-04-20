@@ -103,7 +103,8 @@ Full documentation is available at:
 If you use this framework in your research, please cite:
 
 ```
-An, R., Libertus, K., Wang, Q., Guo, X., Chung, R.*. (in preparation). Evaluating AI as a Research Assistant in Developmental Science: A Tiered Framework Applied to Video-Based Infant Behavioral Coding.
+An, R., Libertus, K., Wang, Q., Guo, X., Chung, R.*. (in preparation). Evaluating AI as a Research Assistant in Developmental Science:
+A Tiered Framework Applied to Video-Based Infant Behavioral Coding.
 https://github.com/ranan122/AI-Motor-Evaluation
 ```
 
