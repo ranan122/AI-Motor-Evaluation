@@ -96,7 +96,8 @@ AI-Motor-Evaluation/
 ## Documentation
 
 Full documentation is available at:
-**(https://ranan122.github.io/AI-Motor-Evaluation/)**
+https://github.com/ranan122/AI-Motor-Evaluation
+
 
 ---
 
