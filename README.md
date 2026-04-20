@@ -3,7 +3,7 @@
 **A framework for evaluating AI performance on infant motor behavior coding from video.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://ranan122.github.io/AI-Motor-Evaluation/)
+[![GitHub Pages](https://img.shields.io/badge/docs-GitHub%20Pages-blue)](https://github.com/ranan122/AI-Motor-Evaluation)
 
 ---
 
@@ -96,7 +96,7 @@ AI-Motor-Evaluation/
 ## Documentation
 
 Full documentation is available at:
-**[https://ranan122.github.io/AI-Motor-Evaluation/](https://ranan122.github.io/AI-Motor-Evaluation/)**
+**(https://ranan122.github.io/AI-Motor-Evaluation/)**
 
 ---
 
