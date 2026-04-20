@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Motor-Evaluation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #1a1a1a;
+      --ink-soft: #4a4a4a;
+      --ink-faint: #888;
+      --paper: #fdfbf7;
+      --paper-warm: #f5f0e8;
+      --rule: #e2dbd0;
+      --teal: #0f6e56;
+      --teal-light: #e1f5ee;
+      --teal-mid: #1d9e75;
+      --coral: #993c1d;
+      --coral-light: #faece7;
+      --amber: #854f0b;
+      --amber-light: #faeeda;
+      --purple: #534ab7;
+      --purple-light: #eeedfe;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    /* Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--paper);
+      border-bottom: 1px solid var(--rule);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* Hero */
+    .hero {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 7rem 2rem 5rem;
+    }
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 500;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-size: 19px;
+      font-weight: 300;
+      color: var(--ink-soft);
+      max-width: 640px;
+      margin-bottom: 2.5rem;
+      line-height: 1.65;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.65rem 1.4rem;
+      border-radius: 6px;
+      font-size: 15px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--teal);
+      color: white;
+      border: 1px solid var(--teal);
+    }
+    .btn-primary:hover { background: #0a5240; border-color: #0a5240; }
+    .btn-outline {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--rule);
+    }
+    .btn-outline:hover { border-color: var(--ink-faint); background: var(--paper-warm); }
+
+    .btn-icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* Divider */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--rule);
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    /* Sections */
+    section {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 4.5rem 2rem;
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 2rem;
+    }
+    h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.7rem;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 1.2rem;
+      line-height: 1.3;
+    }
+    p { color: var(--ink-soft); margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+
+    /* Framework tiers */
+    .tier-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .tier-card {
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 1.5rem;
+      background: white;
+    }
+    .tier-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+    .tier-1 .tier-badge { background: var(--teal-light); color: var(--teal); }
+    .tier-2 .tier-badge { background: var(--purple-light); color: var(--purple); }
+    .tier-card h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--ink);
+    }
+    .tier-card p {
+      font-size: 14.5px;
+      color: var(--ink-soft);
+      margin-bottom: 1.2rem;
+    }
+    .task-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .task-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 14px;
+    }
+    .task-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .tier-1 .task-dot { background: var(--teal-mid); }
+    .tier-2 .task-dot { background: var(--purple); }
+    .task-item span { color: var(--ink-soft); line-height: 1.5; }
+
+    /* Classification */
+    .class-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      font-size: 15px;
+    }
+    .class-table th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      padding: 0 1rem 0.75rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .class-table td {
+      padding: 1rem;
+      vertical-align: top;
+      border-bottom: 1px solid var(--rule);
+      color: var(--ink-soft);
+      line-height: 1.55;
+    }
+    .class-table tr:last-child td { border-bottom: none; }
+    .class-table td:first-child {
+      font-weight: 400;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+    .class-pill {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 100px;
+      margin-bottom: 4px;
+    }
+    .pill-independent { background: var(--teal-light); color: var(--teal); }
+    .pill-emergent { background: var(--amber-light); color: var(--amber); }
+    .pill-non { background: var(--coral-light); color: var(--coral); }
+
+    /* Note box */
+    .note-box {
+      background: var(--paper-warm);
+      border-left: 3px solid var(--teal-mid);
+      border-radius: 0 8px 8px 0;
+      padding: 1rem 1.25rem;
+      margin-top: 1.5rem;
+      font-size: 14.5px;
+      color: var(--ink-soft);
+    }
+
+    /* Repo structure */
+    .file-tree {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border-radius: 10px;
+      padding: 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 13.5px;
+      line-height: 2;
+      margin-top: 2rem;
+      overflow-x: auto;
+    }
+    .file-tree .dir { color: #9cdcfe; }
+    .file-tree .file { color: #ce9178; }
+    .file-tree .comment { color: #6a9955; }
+
+    /* Citation */
+    .citation-block {
+      background: var(--paper-warm);
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.9;
+      color: var(--ink-soft);
+      margin-top: 1.75rem;
+      overflow-x: auto;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding: 2.5rem 2rem;
+      max-width: 820px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 13.5px;
+      color: var(--ink-faint);
+    }
+    footer a { color: var(--ink-faint); text-decoration: none; }
+    footer a:hover { color: var(--teal); }
+
+    @media (max-width: 600px) {
+      .tier-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
+      nav { padding: 0 1rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="#">AI-Motor-Evaluation</a>
+    <ul class="nav-links">
+      <li><a href="#framework">Framework</a></li>
+      <li><a href="#classification">Classification</a></li>
+      <li><a href="#repository">Repository</a></li>
+      <li><a href="#cite">Cite</a></li>
+      <li><a href="https://github.com/ranan122/AI-Motor-Evaluation" target="_blank">GitHub</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <p class="hero-eyebrow">Open Framework &nbsp;·&nbsp; Developmental Science &amp; AI</p>
+    <h1>Can AI code infant motor behavior from video?</h1>
+    <p class="hero-sub">
+      A structured evaluation framework for measuring how well large language models perform on behavioral coding tasks traditionally done by human researchers, benchmarked on infant sitting behavior.
+    </p>
+    <div class="hero-actions">
+      <a href="https://github.com/ranan122/AI-Motor-Evaluation" class="btn btn-primary" target="_blank">
+        <svg class="btn-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        View on GitHub
+      </a>
+      <a href="#framework" class="btn btn-outline">Read the framework</a>
+    </div>
+  </div>
+
+  <hr class="section-divider" />
+
+  <!-- Framework -->
+  <section id="framework">
+    <p class="section-label">Evaluation Framework</p>
+    <h2>Two tiers of tasks</h2>
+    <p>
+      The framework separates AI evaluation into two tiers. Tier 1 tasks ask the model to replicate what a trained human coder does: identifying postures, estimating durations, and categorizing infants. Tier 2 tasks ask the model to go further, drawing inferences from visual cues that coders themselves might not explicitly record.
+    </p>
+    <p>
+      This separation is intentional. Tier 1 has clear ground truth from existing coded data, making accuracy straightforward to measure. Tier 2 requires new scoring rubrics and is inherently harder, but opens the door to questions about what AI can do that traditional coding pipelines cannot.
+    </p>
+
+    <div class="tier-grid">
+      <div class="tier-card tier-1">
+        <span class="tier-badge">Tier 1</span>
+        <h3>Coding tasks</h3>
+        <p>Replicating the work of human coders, scoreable against existing ground truth.</p>
+        <ul class="task-list">
+          <li class="task-item"><span class="task-dot"></span><span><strong>Posture identification</strong> — classify each video frame into postures 0 through 3</span></li>
+          <li class="task-item"><span class="task-dot"></span><span><strong>Temporal estimation</strong> — estimate how long each posture lasts within a clip</span></li>
+          <li class="task-item"><span class="task-dot"></span><span><strong>Sitter categorization</strong> — classify the infant as an independent, emergent, or non-sitter</span></li>
+        </ul>
+      </div>
+
+      <div class="tier-card tier-2">
+        <span class="tier-badge">Tier 2</span>
+        <h3>Inference tasks</h3>
+        <p>Reasoning beyond explicit coding, requiring new rubrics and scoring approaches.</p>
+        <ul class="task-list">
+          <li class="task-item"><span class="task-dot"></span><span><strong>Age estimation</strong> — estimate the infant's age in months from motor and physical cues</span></li>
+          <li class="task-item"><span class="task-dot"></span><span><strong>Sex identification</strong> — identify the infant's sex from available contextual cues</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- Classification -->
+  <section id="classification">
+    <p class="section-label">Sitter Classification</p>
+    <h2>How infants are classified</h2>
+    <p>
+      Infants are classified into one of three sitting categories based on the proportion of codable postural time. Only postures 0 through 3 count toward the denominator — transitional codes F (fall) and N (non-codable) are excluded. Categories are mutually exclusive and checked in order.
+    </p>
+
+    <table class="class-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Rule</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="class-pill pill-independent">Independent sitter</span></td>
+          <td>Posture 3 accounts for 50% or more of codable time</td>
+        </tr>
+        <tr>
+          <td><span class="class-pill pill-emergent">Emergent sitter</span></td>
+          <td>Postures 2 and 3 combined account for 50% or more of codable time, but posture 3 alone is under 50%</td>
+        </tr>
+        <tr>
+          <td><span class="class-pill pill-non">Non-sitter</span></td>
+          <td>Postures 0 and 1 combined account for 50% or more of codable time</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note-box">
+      <strong>Posture codes:</strong> 0 = lying or unsupported flat &nbsp;·&nbsp; 1 = semi-supported &nbsp;·&nbsp; 2 = supported sitting &nbsp;·&nbsp; 3 = independent sitting &nbsp;·&nbsp; F = transitional fall &nbsp;·&nbsp; N = non-codable transition
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- Repository -->
+  <section id="repository">
+    <p class="section-label">Repository</p>
+    <h2>What's in this repo</h2>
+    <p>
+      The repository is organized so that code and documentation stay separate, and so that the framework can be extended to new motor behaviors without restructuring the whole project.
+    </p>
+
+    <div class="file-tree">
+      <span class="dir">AI-Motor-Evaluation/</span><br>
+      &nbsp;&nbsp;├── <span class="file">LICENSE</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># MIT License</span><br>
+      &nbsp;&nbsp;├── <span class="file">README.md</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># This document</span><br>
+      &nbsp;&nbsp;├── <span class="file">CITATION.cff</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Citation metadata</span><br>
+      &nbsp;&nbsp;├── <span class="dir">docs/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># GitHub Pages site</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">index.html</span><br>
+      &nbsp;&nbsp;├── <span class="dir">protocol/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Coding manual &amp; rubrics</span><br>
+      &nbsp;&nbsp;│&nbsp;&nbsp; └── <span class="file">README.md</span><br>
+      &nbsp;&nbsp;└── <span class="dir">scripts/</span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Python analysis code</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">README.md</span>
+    </div>
+  </section>
+
+  <hr class="section-divider" />
+
+  <!-- Cite -->
+  <section id="cite">
+    <p class="section-label">Citation</p>
+    <h2>How to cite this work</h2>
+    <p>
+      This framework is currently in preparation. If you use it in your research before a formal publication is available, please cite the repository directly.
+    </p>
+
+    <div class="citation-block">
+      An, R., et al. (in preparation). AI-Motor-Evaluation: A framework for evaluating<br>
+      AI performance on infant motor behavior coding.<br>
+      https://github.com/ranan122/AI-Motor-Evaluation
+    </div>
+
+    <p style="margin-top: 1.25rem; font-size: 14.5px;">
+      A <code style="background: var(--paper-warm); padding: 1px 6px; border-radius: 4px; font-size: 13px;">CITATION.cff</code> file is included in the repository for use with automated citation tools such as Zenodo and the GitHub citation button.
+    </p>
+  </section>
+
+  <hr class="section-divider" />
+
+  <footer>
+    <span>MIT License &nbsp;·&nbsp; <a href="https://github.com/ranan122/AI-Motor-Evaluation" target="_blank">github.com/ranan122/AI-Motor-Evaluation</a></span>
+    <span><a href="https://github.com/ranan122" target="_blank">@ranan122</a></span>
+  </footer>
+
+</body>
+</html>
